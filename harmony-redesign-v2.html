@@ -1,0 +1,961 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Harmony Aesthetics & Psychology Studio — Dr. Swati</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400;1,500&family=Inter:wght@300;400;500&family=IBM+Plex+Mono:wght@300;400&display=swap" rel="stylesheet"/>
+
+<style>
+/*
+  PALETTE — Feminine × Clinical
+  ─────────────────────────────
+  #F5F0F4  Frost Petal    → barely-pink white; soft, never saccharine
+  #1A1A2E  Midnight Plum  → near-black with violet undertone; clinical gravity
+  #C9A0A0  Muted Rose     → the feminine accent; desaturated so it reads luxury
+  #8B7FA8  Slate Lavender → psychology pillar color; calm, introspective
+  #D4CDD8  Lavender Mist  → background tint for alternating sections
+  #2E2E3A  Charcoal Ink   → body text; softer than pure black
+*/
+:root {
+  --frost:     #F5F0F4;
+  --plum:      #1A1A2E;
+  --rose:      #C9A0A0;
+  --lavender:  #8B7FA8;
+  --mist:      #D4CDD8;
+  --charcoal:  #2E2E3A;
+  --rose-faint: rgba(201,160,160,0.12);
+  --plum-faint: rgba(26,26,46,0.07);
+
+  --serif: 'Playfair Display', Georgia, serif;
+  --sans:  'Inter', system-ui, sans-serif;
+  --mono:  'IBM Plex Mono', monospace;
+
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--sans);
+  background: var(--frost);
+  color: var(--charcoal);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* ── WATERMARK ── */
+.wm { font-family: var(--mono); font-size: 8.5px; letter-spacing: 0.15em;
+      text-transform: uppercase; opacity: 0.3; pointer-events: none; user-select: none; color: inherit; }
+
+/* ══════════════════════════════
+   NAV
+══════════════════════════════ */
+.nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 22px 56px;
+  transition: background 0.5s var(--ease), border-color 0.5s;
+  border-bottom: 1px solid transparent;
+}
+.nav.scrolled {
+  background: rgba(245,240,244,0.92);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom-color: rgba(201,160,160,0.25);
+}
+.nav-logo { display: flex; flex-direction: column; gap: 2px; text-decoration: none; }
+.nav-logo-main { font-family: var(--serif); font-size: 17px; font-weight: 400; color: var(--plum); letter-spacing: 0.02em; line-height: 1; }
+.nav-logo-sub { font-size: 8.5px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--rose); }
+
+.nav-center { display: flex; gap: 38px; list-style: none; }
+.nav-center a { font-size: 11px; letter-spacing: 0.13em; text-transform: uppercase; color: var(--charcoal); text-decoration: none; opacity: 0.65; transition: opacity 0.2s; }
+.nav-center a:hover { opacity: 1; }
+
+.nav-right { display: flex; align-items: center; gap: 20px; }
+.nav-tel { font-family: var(--mono); font-size: 11px; letter-spacing: 0.06em; color: var(--charcoal); opacity: 0.55; text-decoration: none; transition: opacity 0.2s; }
+.nav-tel:hover { opacity: 0.9; }
+.nav-book {
+  font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--frost); background: var(--plum);
+  padding: 10px 24px; border-radius: 2px;
+  text-decoration: none; transition: background 0.25s;
+}
+.nav-book:hover { background: var(--lavender); }
+
+.hamburger { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 4px; }
+.hamburger span { display: block; width: 22px; height: 1px; background: var(--charcoal); }
+
+/* ══════════════════════════════
+   HERO  — Full bleed, editorial
+   SIGNATURE: the thin vertical
+   rule on the left that runs the
+   full hero height, with a small
+   rose circle at the midpoint —
+   like a medical IV drip line.
+   Feminine + clinical in one mark.
+══════════════════════════════ */
+.hero {
+  min-height: 100svh;
+  display: grid;
+  grid-template-columns: 56px 1fr 1fr;
+  position: relative;
+  overflow: hidden;
+  padding-top: 80px;
+}
+
+/* Vertical rule — the signature element */
+.hero-rule {
+  grid-column: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0;
+  position: relative;
+  z-index: 4;
+}
+.hero-rule-line {
+  width: 1px;
+  flex: 1;
+  background: linear-gradient(to bottom, transparent 0%, var(--rose) 20%, var(--rose) 80%, transparent 100%);
+}
+.hero-rule-circle {
+  width: 10px; height: 10px; border-radius: 50%;
+  background: var(--rose); flex-shrink: 0;
+  box-shadow: 0 0 0 4px rgba(201,160,160,0.2);
+}
+
+/* LEFT TEXT */
+.hero-text {
+  grid-column: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 80px 56px 80px 40px;
+  position: relative;
+  z-index: 3;
+}
+
+.hero-tag {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--lavender);
+  margin-bottom: 32px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.hero-tag::before { content: ''; display: block; width: 24px; height: 1px; background: var(--lavender); }
+
+.hero-h1 {
+  font-family: var(--serif);
+  font-size: clamp(42px, 4.8vw, 72px);
+  font-weight: 400;
+  line-height: 1.08;
+  letter-spacing: -0.01em;
+  color: var(--plum);
+  margin-bottom: 30px;
+}
+.hero-h1 em {
+  font-style: italic;
+  font-weight: 400;
+  color: var(--rose);
+  display: block;
+}
+
+.hero-p {
+  font-size: 14px;
+  line-height: 1.85;
+  color: var(--charcoal);
+  opacity: 0.6;
+  max-width: 360px;
+  font-weight: 300;
+  margin-bottom: 44px;
+}
+
+.hero-actions { display: flex; align-items: center; gap: 18px; flex-wrap: wrap; }
+
+.btn-fill {
+  display: inline-flex; align-items: center; gap: 10px;
+  background: var(--plum); color: var(--frost);
+  font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase;
+  padding: 14px 32px; border-radius: 2px; text-decoration: none;
+  transition: background 0.25s, transform 0.2s var(--ease);
+}
+.btn-fill:hover { background: var(--lavender); transform: translateY(-2px); }
+.btn-fill svg { transition: transform 0.3s var(--ease); }
+.btn-fill:hover svg { transform: translateX(4px); }
+
+.btn-outline {
+  font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--charcoal); text-decoration: none; opacity: 0.55;
+  border-bottom: 1px solid currentColor; padding-bottom: 2px;
+  transition: opacity 0.2s, color 0.2s;
+}
+.btn-outline:hover { opacity: 1; color: var(--rose); }
+
+/* DR SWATI credential strip */
+.hero-credential {
+  margin-top: 56px;
+  display: flex;
+  align-items: center;
+  gap: 0;
+  border: 1px solid rgba(201,160,160,0.3);
+  border-radius: 3px;
+  overflow: hidden;
+  max-width: 380px;
+}
+.cred-avatar {
+  width: 52px; height: 52px; flex-shrink: 0;
+  background: linear-gradient(135deg, var(--mist), var(--rose));
+  display: flex; align-items: center; justify-content: center;
+}
+.cred-avatar svg { width: 26px; height: 26px; color: white; }
+.cred-body { padding: 10px 16px; flex: 1; }
+.cred-name { font-family: var(--serif); font-size: 14px; font-weight: 500; color: var(--plum); }
+.cred-roles { font-size: 10px; letter-spacing: 0.05em; color: var(--charcoal); opacity: 0.55; margin-top: 2px; line-height: 1.5; }
+.cred-stat {
+  padding: 0 16px;
+  border-left: 1px solid rgba(201,160,160,0.25);
+  text-align: center;
+  flex-shrink: 0;
+}
+.cred-stat-num { font-family: var(--serif); font-size: 20px; color: var(--plum); }
+.cred-stat-label { font-size: 8.5px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--rose); white-space: nowrap; margin-top: 1px; }
+
+/* RIGHT IMAGE PANEL */
+.hero-visual {
+  grid-column: 3;
+  position: relative;
+  background: var(--mist);
+  overflow: hidden;
+}
+
+/* Curved left edge bleeding into text side */
+.hero-visual::before {
+  content: '';
+  position: absolute;
+  top: 0; bottom: 0; left: -40px;
+  width: 80px;
+  background: var(--frost);
+  border-radius: 0 60% 60% 0 / 0 120px 120px 0;
+  z-index: 2;
+}
+
+.hero-visual-bg {
+  position: absolute; inset: 0;
+  background: linear-gradient(150deg, #e8dde6 0%, #c8b8c8 50%, #b0a0b8 100%);
+  display: flex; align-items: center; justify-content: center;
+}
+/* Placeholder person silhouette */
+.hero-visual-bg svg { width: 55%; opacity: 0.15; color: var(--plum); }
+
+/* Floating treatment card */
+.hero-float-card {
+  position: absolute;
+  bottom: 60px; left: 24px;
+  z-index: 10;
+  background: rgba(245,240,244,0.95);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(201,160,160,0.3);
+  border-radius: 3px;
+  padding: 16px 20px;
+  min-width: 200px;
+}
+.float-card-label { font-family: var(--mono); font-size: 8px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--rose); margin-bottom: 8px; }
+.float-card-items { display: flex; flex-direction: column; gap: 5px; }
+.float-card-item {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 11px; color: var(--charcoal); letter-spacing: 0.03em;
+}
+.float-card-item::before { content: ''; width: 5px; height: 5px; border-radius: 50%; flex-shrink: 0; }
+.float-card-item.rose::before { background: var(--rose); }
+.float-card-item.lav::before { background: var(--lavender); }
+.float-card-item.plum::before { background: var(--plum); }
+
+/* Watermark in image */
+.hero-wm { position: absolute; bottom: 16px; right: 16px; z-index: 20; }
+
+/* ══════════════════════════════
+   INTRO BAND
+══════════════════════════════ */
+.intro-band {
+  background: var(--plum);
+  padding: 56px;
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 32px; flex-wrap: wrap;
+  position: relative; overflow: hidden;
+}
+.intro-band::before {
+  content: 'Concept Preview by SK Steel Works';
+  position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
+  font-family: var(--mono); font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase;
+  color: rgba(245,240,244,0.04); white-space: nowrap; pointer-events: none;
+}
+.intro-stat { text-align: center; }
+.intro-stat-num { font-family: var(--serif); font-size: 40px; color: var(--frost); line-height: 1; }
+.intro-stat-num span { font-size: 22px; color: var(--rose); }
+.intro-stat-label { font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(245,240,244,0.4); margin-top: 6px; }
+.intro-divider { width: 1px; height: 48px; background: rgba(245,240,244,0.1); flex-shrink: 0; }
+.intro-tagline { font-family: var(--serif); font-size: clamp(18px, 2vw, 26px); color: var(--frost); font-weight: 400; font-style: italic; max-width: 380px; line-height: 1.5; }
+
+/* ══════════════════════════════
+   THREE PILLARS
+══════════════════════════════ */
+.pillars { padding: 110px 56px; }
+
+.pillars-eyebrow {
+  font-family: var(--mono); font-size: 9px; letter-spacing: 0.22em;
+  text-transform: uppercase; color: var(--lavender);
+  display: flex; align-items: center; gap: 12px; margin-bottom: 20px;
+}
+.pillars-eyebrow::before { content: ''; width: 28px; height: 1px; background: var(--lavender); }
+
+.pillars-heading {
+  font-family: var(--serif); font-size: clamp(30px, 3vw, 46px);
+  font-weight: 400; color: var(--plum); line-height: 1.12;
+  margin-bottom: 64px; max-width: 500px;
+}
+.pillars-heading em { font-style: italic; color: var(--rose); }
+
+.pillars-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; }
+
+.pillar {
+  background: var(--plum-faint);
+  padding: 44px 36px;
+  position: relative;
+  cursor: pointer;
+  overflow: hidden;
+  transition: background 0.35s var(--ease);
+}
+.pillar::after {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0;
+  height: 2px;
+  transform: scaleX(0);
+  transition: transform 0.4s var(--ease);
+  transform-origin: left;
+}
+.pillar.rose-pillar::after { background: var(--rose); }
+.pillar.lav-pillar::after { background: var(--lavender); }
+.pillar.plum-pillar::after { background: var(--plum); }
+.pillar:hover::after { transform: scaleX(1); }
+.pillar:hover { background: rgba(201,160,160,0.07); }
+
+.pillar-num { font-family: var(--mono); font-size: 9px; letter-spacing: 0.2em; color: var(--rose); margin-bottom: 28px; }
+.pillar-title { font-family: var(--serif); font-size: 22px; color: var(--plum); margin-bottom: 14px; }
+.pillar-body { font-size: 13px; line-height: 1.8; color: var(--charcoal); opacity: 0.6; font-weight: 300; margin-bottom: 28px; }
+.pillar-link { font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--rose); text-decoration: none; display: flex; align-items: center; gap: 6px; transition: gap 0.2s; }
+.pillar:hover .pillar-link { gap: 10px; }
+
+/* ══════════════════════════════
+   DR SWATI — Full section
+══════════════════════════════ */
+.drswati {
+  background: var(--mist);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 75vh;
+  overflow: hidden;
+}
+
+.drswati-text {
+  padding: 100px 80px 100px 56px;
+  display: flex; flex-direction: column; justify-content: center;
+}
+.section-eyebrow { font-family: var(--mono); font-size: 9px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--rose); display: flex; align-items: center; gap: 12px; margin-bottom: 24px; }
+.section-eyebrow::before { content: ''; width: 24px; height: 1px; background: var(--rose); }
+.section-h2 { font-family: var(--serif); font-size: clamp(30px, 3vw, 48px); font-weight: 400; line-height: 1.1; color: var(--plum); margin-bottom: 24px; }
+.section-h2 em { font-style: italic; color: var(--lavender); }
+.section-body { font-size: 14px; line-height: 1.85; color: var(--charcoal); opacity: 0.65; font-weight: 300; max-width: 400px; margin-bottom: 36px; }
+
+.quals { display: flex; flex-direction: column; gap: 10px; margin-bottom: 40px; }
+.qual-item { display: flex; align-items: center; gap: 12px; font-size: 12px; color: var(--charcoal); }
+.qual-pip { width: 4px; height: 4px; border-radius: 50%; background: var(--rose); flex-shrink: 0; }
+
+.drswati-visual {
+  position: relative;
+  background: linear-gradient(160deg, #e8dde6, #c8b8d0);
+  overflow: hidden;
+  display: flex; align-items: flex-end; justify-content: center;
+}
+.drswati-visual::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(26,26,46,0.25), transparent 50%);
+}
+.drswati-visual svg { width: 60%; opacity: 0.12; color: var(--plum); position: relative; z-index: 0; margin-bottom: -20px; }
+
+.drswati-name-overlay {
+  position: absolute; bottom: 36px; left: 36px; z-index: 5;
+}
+.overlay-name { font-family: var(--serif); font-size: 32px; font-style: italic; color: var(--frost); text-shadow: 0 2px 20px rgba(26,26,46,0.4); }
+.overlay-title { font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(245,240,244,0.65); margin-top: 4px; }
+
+/* ══════════════════════════════
+   TREATMENTS
+══════════════════════════════ */
+.treatments { padding: 110px 56px; background: var(--frost); }
+
+.treatments-header { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 56px; gap: 24px; flex-wrap: wrap; }
+
+.pill-tabs { display: flex; gap: 6px; flex-wrap: wrap; }
+.ptab {
+  font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase;
+  padding: 7px 18px; border-radius: 2px; border: 1px solid rgba(201,160,160,0.4);
+  background: transparent; color: var(--charcoal); cursor: pointer;
+  transition: all 0.22s; opacity: 0.6;
+}
+.ptab.active, .ptab:hover { background: var(--plum); color: var(--frost); border-color: var(--plum); opacity: 1; }
+
+.tgrid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+
+.tcard {
+  border: 1px solid rgba(201,160,160,0.2);
+  border-radius: 3px;
+  overflow: hidden;
+  transition: transform 0.35s var(--ease), box-shadow 0.35s, border-color 0.25s;
+  cursor: pointer;
+}
+.tcard:hover { transform: translateY(-5px); box-shadow: 0 16px 48px rgba(26,26,46,0.09); border-color: rgba(201,160,160,0.5); }
+
+.tcard-img {
+  height: 200px;
+  display: flex; align-items: center; justify-content: center;
+  position: relative; overflow: hidden;
+  font-family: var(--serif); font-style: italic; font-size: 17px;
+  color: rgba(255,255,255,0.6);
+}
+.tcard-img-overlay { position: absolute; inset: 0; display: flex; align-items: flex-end; padding: 14px; }
+.tcard-category { font-family: var(--mono); font-size: 8px; letter-spacing: 0.18em; text-transform: uppercase; padding: 4px 10px; border-radius: 2px; backdrop-filter: blur(8px); background: rgba(245,240,244,0.2); color: var(--frost); border: 1px solid rgba(245,240,244,0.25); }
+
+.tcard-body { padding: 24px 22px; }
+.tcard-title { font-family: var(--serif); font-size: 18px; color: var(--plum); margin-bottom: 8px; }
+.tcard-desc { font-size: 12px; line-height: 1.75; color: var(--charcoal); opacity: 0.6; font-weight: 300; }
+.tcard-cta { display: inline-flex; align-items: center; gap: 6px; margin-top: 16px; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--rose); text-decoration: none; transition: gap 0.2s; }
+.tcard:hover .tcard-cta { gap: 10px; }
+
+/* ══════════════════════════════
+   TESTIMONIALS
+══════════════════════════════ */
+.testimonials { background: var(--plum); padding: 100px 56px; }
+.test-header { margin-bottom: 52px; }
+.test-header .section-eyebrow { color: var(--rose); }
+.test-header .section-eyebrow::before { background: var(--rose); }
+.test-heading { font-family: var(--serif); font-size: clamp(28px, 2.8vw, 42px); color: var(--frost); font-weight: 400; line-height: 1.15; }
+.test-heading em { font-style: italic; color: rgba(201,160,160,0.8); }
+
+.test-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.testi {
+  border: 1px solid rgba(245,240,244,0.08);
+  padding: 32px;
+  border-radius: 3px;
+  display: flex; flex-direction: column; gap: 16px;
+  transition: border-color 0.25s, background 0.25s;
+}
+.testi:hover { border-color: rgba(201,160,160,0.3); background: rgba(245,240,244,0.03); }
+.testi-stars { color: var(--rose); letter-spacing: 2px; font-size: 13px; }
+.testi-quote { font-family: var(--serif); font-style: italic; font-size: 16px; color: var(--frost); line-height: 1.65; font-weight: 400; }
+.testi-author { display: flex; align-items: center; gap: 12px; margin-top: auto; padding-top: 16px; border-top: 1px solid rgba(245,240,244,0.08); }
+.testi-dot { width: 34px; height: 34px; border-radius: 50%; flex-shrink: 0; }
+.testi-name { font-size: 12px; color: var(--frost); font-weight: 500; }
+.testi-detail { font-size: 10px; color: rgba(245,240,244,0.4); margin-top: 2px; letter-spacing: 0.04em; }
+
+/* ══════════════════════════════
+   BOOK CTA BAND
+══════════════════════════════ */
+.book-band {
+  background: var(--rose);
+  padding: 80px 56px;
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 32px; flex-wrap: wrap;
+}
+.book-band-text {}
+.book-band-heading { font-family: var(--serif); font-size: clamp(26px, 3vw, 40px); color: var(--plum); line-height: 1.15; }
+.book-band-heading em { font-style: italic; }
+.book-band-sub { font-size: 13px; color: rgba(26,26,46,0.6); margin-top: 10px; font-weight: 300; }
+.book-band-actions { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+.btn-white { background: var(--plum); color: var(--frost); font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; padding: 14px 32px; border-radius: 2px; text-decoration: none; transition: background 0.25s; display: inline-flex; align-items: center; gap: 10px; }
+.btn-white:hover { background: var(--lavender); }
+.book-band-tel { font-family: var(--mono); font-size: 15px; color: var(--plum); text-decoration: none; opacity: 0.7; transition: opacity 0.2s; }
+.book-band-tel:hover { opacity: 1; }
+
+/* ══════════════════════════════
+   FOOTER
+══════════════════════════════ */
+.footer { background: var(--charcoal); padding: 80px 56px 36px; }
+.footer-grid { display: grid; grid-template-columns: 1.6fr 1fr 1fr; gap: 64px; margin-bottom: 56px; }
+.footer-brand-name { font-family: var(--serif); font-size: 22px; color: var(--frost); margin-bottom: 14px; }
+.footer-brand-body { font-size: 12px; line-height: 1.8; color: rgba(245,240,244,0.4); font-weight: 300; }
+.footer-brand-contact { margin-top: 20px; font-size: 12px; line-height: 1.9; color: var(--rose); }
+.footer-col-label { font-family: var(--mono); font-size: 8.5px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--rose); margin-bottom: 18px; }
+.footer-links { list-style: none; display: flex; flex-direction: column; gap: 9px; }
+.footer-links a { font-size: 12px; color: rgba(245,240,244,0.45); text-decoration: none; transition: color 0.2s; }
+.footer-links a:hover { color: var(--frost); }
+.footer-bottom { display: flex; align-items: center; justify-content: space-between; padding-top: 28px; border-top: 1px solid rgba(245,240,244,0.06); flex-wrap: wrap; gap: 12px; }
+.footer-copy { font-size: 11px; color: rgba(245,240,244,0.25); }
+
+/* ══════════════════════════════
+   REVEALS
+══════════════════════════════ */
+.rev { opacity: 0; transform: translateY(24px); transition: opacity 0.75s var(--ease), transform 0.75s var(--ease); }
+.rev.d1 { transition-delay: 0.1s; }
+.rev.d2 { transition-delay: 0.2s; }
+.rev.d3 { transition-delay: 0.3s; }
+.rev.in { opacity: 1; transform: none; }
+
+/* FAB */
+.fab { position: fixed; bottom: 30px; right: 30px; z-index: 190; background: var(--rose); color: var(--plum); font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; padding: 13px 26px; border-radius: 2px; text-decoration: none; box-shadow: 0 6px 28px rgba(201,160,160,0.4); transition: transform 0.3s var(--ease), box-shadow 0.3s, background 0.2s; display: flex; align-items: center; gap: 8px; font-weight: 500; }
+.fab:hover { transform: translateY(-3px); box-shadow: 0 12px 36px rgba(201,160,160,0.5); background: #d4b0b0; }
+
+/* ══════════════════════════════
+   RESPONSIVE
+══════════════════════════════ */
+@media (max-width: 1024px) {
+  .nav { padding: 18px 28px; }
+  .nav-center, .nav-tel { display: none; }
+  .hamburger { display: flex; }
+
+  .hero { grid-template-columns: 24px 1fr; }
+  .hero-visual { display: none; }
+  .hero-text { padding: 60px 32px 60px 20px; }
+  .hero-credential { max-width: 100%; }
+
+  .intro-band { padding: 40px 28px; justify-content: center; }
+  .intro-divider { display: none; }
+
+  .pillars { padding: 80px 28px; }
+  .pillars-grid { grid-template-columns: 1fr; gap: 2px; }
+
+  .drswati { grid-template-columns: 1fr; }
+  .drswati-visual { min-height: 50vw; order: -1; }
+  .drswati-text { padding: 64px 28px; }
+
+  .treatments { padding: 80px 28px; }
+  .tgrid { grid-template-columns: 1fr; }
+
+  .testimonials { padding: 80px 28px; }
+  .test-grid { grid-template-columns: 1fr; }
+
+  .book-band { padding: 60px 28px; }
+
+  .footer { padding: 60px 28px 32px; }
+  .footer-grid { grid-template-columns: 1fr; gap: 36px; }
+  .footer-bottom { flex-direction: column; text-align: center; }
+}
+@media (max-width: 480px) {
+  .hero-h1 { font-size: 36px; }
+  .fab { bottom: 16px; right: 16px; padding: 11px 20px; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav" id="nav">
+  <a class="nav-logo" href="#">
+    <span class="nav-logo-main">Harmony</span>
+    <span class="nav-logo-sub">Aesthetics & Psychology</span>
+  </a>
+  <ul class="nav-center">
+    <li><a href="#about">About</a></li>
+    <li><a href="#treatments">Treatments</a></li>
+    <li><a href="#drswati">Dr. Swati</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <div class="nav-right">
+    <a href="tel:+919540314878" class="nav-tel">+91 9540 314 878</a>
+    <a href="tel:+919540314878" class="nav-book">Book Now</a>
+  </div>
+  <button class="hamburger" aria-label="Open menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-rule">
+    <div class="hero-rule-line"></div>
+    <div class="hero-rule-circle"></div>
+    <div class="hero-rule-line"></div>
+  </div>
+
+  <div class="hero-text">
+    <div class="hero-tag">New Delhi · Dwarka Sector 23</div>
+
+    <h1 class="hero-h1">
+      Precision care for<br/>the whole
+      <em>you</em>
+    </h1>
+
+    <p class="hero-p">
+      Non-surgical aesthetics, clinical homeopathy, and psychological wellness —
+      brought together under one roof, by one doctor who sees you as one person.
+    </p>
+
+    <div class="hero-actions">
+      <a href="tel:+919540314878" class="btn-fill">
+        Book a Consultation
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+          <path d="M2 7h10M8 2l4 5-4 5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
+      <a href="#treatments" class="btn-outline">Explore Treatments</a>
+    </div>
+
+    <div class="hero-credential">
+      <div class="cred-avatar">
+        <!-- Swap for <img src="drswati-thumb.jpg" style="width:100%;height:100%;object-fit:cover;"> -->
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/>
+        </svg>
+      </div>
+      <div class="cred-body">
+        <div class="cred-name">Dr. Swati</div>
+        <div class="cred-roles">Aesthetic Consultant · Homeopath<br/>Clinical Psychologist · Marital Counsellor</div>
+      </div>
+      <div class="cred-stat">
+        <div class="cred-stat-num">10K+</div>
+        <div class="cred-stat-label">Patients</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- RIGHT VISUAL PANEL -->
+  <div class="hero-visual">
+    <div class="hero-visual-bg">
+      <!-- Replace with Dr. Swati's portrait:
+           <img src="hero.jpg" style="width:100%;height:100%;object-fit:cover;object-position:top"> -->
+      <svg viewBox="0 0 100 130" fill="none">
+        <circle cx="50" cy="36" r="22" fill="currentColor"/>
+        <path d="M6 120c0-24 20-44 44-44s44 20 44 44" fill="currentColor"/>
+      </svg>
+    </div>
+
+    <div class="hero-float-card">
+      <div class="float-card-label">What we offer</div>
+      <div class="float-card-items">
+        <div class="float-card-item rose">Lip Fillers & Botox</div>
+        <div class="float-card-item rose">Skin & Laser Therapy</div>
+        <div class="float-card-item lav">Marital Counselling</div>
+        <div class="float-card-item lav">Intimacy Coaching</div>
+        <div class="float-card-item plum">Clinical Homeopathy</div>
+      </div>
+    </div>
+
+    <div class="hero-wm"><span class="wm" style="color:var(--frost);">Concept Preview by SK Steel Works</span></div>
+  </div>
+</section>
+
+<!-- INTRO BAND -->
+<div class="intro-band">
+  <div class="intro-stat">
+    <div class="intro-stat-num">10<span>K+</span></div>
+    <div class="intro-stat-label">Patients Treated</div>
+  </div>
+  <div class="intro-divider"></div>
+  <div class="intro-stat">
+    <div class="intro-stat-num">11<span>+</span></div>
+    <div class="intro-stat-label">Years of Practice</div>
+  </div>
+  <div class="intro-divider"></div>
+  <p class="intro-tagline">"Where aesthetics and psychology share the same vision of you."</p>
+  <div class="intro-divider"></div>
+  <div class="intro-stat">
+    <div class="intro-stat-num">3<span> pillars</span></div>
+    <div class="intro-stat-label">Of Holistic Care</div>
+  </div>
+</div>
+
+<!-- THREE PILLARS -->
+<section class="pillars" id="about">
+  <div class="pillars-eyebrow rev">Our Three Pillars</div>
+  <h2 class="pillars-heading rev d1">Beauty, health, and mind —<br/><em>never separate</em></h2>
+
+  <div class="pillars-grid">
+    <div class="pillar rose-pillar rev">
+      <div class="pillar-num">— Pillar I</div>
+      <div class="pillar-title">Premium Aesthetics</div>
+      <div class="pillar-body">Lip fillers, Botox, Hair PRP, microneedling, HF wave therapy, semi-permanent artistry — each treatment calibrated to your face, not a formula.</div>
+      <a href="#treatments" class="pillar-link">
+        View Treatments
+        <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6h8M6 2l4 4-4 4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </div>
+
+    <div class="pillar lav-pillar rev d1">
+      <div class="pillar-num">— Pillar II</div>
+      <div class="pillar-title">Clinical Homeopathy</div>
+      <div class="pillar-body">Evidence-informed, deeply personalised medicine. No side effects, no shortcuts — treatment that works with your body's own intelligence.</div>
+      <a href="#" class="pillar-link">
+        Learn More
+        <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6h8M6 2l4 4-4 4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </div>
+
+    <div class="pillar plum-pillar rev d2">
+      <div class="pillar-num">— Pillar III</div>
+      <div class="pillar-title">Psychology & Coaching</div>
+      <div class="pillar-body">Marital counselling, intimacy coaching, and mental wellness — compassionate, private, and entirely non-judgmental.</div>
+      <a href="#" class="pillar-link">
+        Learn More
+        <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6h8M6 2l4 4-4 4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- DR SWATI -->
+<section class="drswati" id="drswati">
+  <div class="drswati-text rev">
+    <div class="section-eyebrow">Meet Dr. Swati</div>
+    <h2 class="section-h2">Healing is both<br/><em>art and science</em></h2>
+    <p class="section-body">Dr. Swati built Harmony on the belief that outer transformation and inner wellbeing are inseparable. With 11+ years across multiple disciplines and 10,000+ patients, she leads every consultation personally.</p>
+
+    <div class="quals">
+      <div class="qual-item"><div class="qual-pip"></div>Aesthetic Consultant & Expert Aesthetician</div>
+      <div class="qual-item"><div class="qual-pip"></div>Homeopathic Consultant (Millennial Doctor)</div>
+      <div class="qual-item"><div class="qual-pip"></div>Clinical Psychologist</div>
+      <div class="qual-item"><div class="qual-pip"></div>Marital Counsellor & Intimacy Coach</div>
+    </div>
+
+    <a href="mailto:carebydrswati@gmail.com" class="btn-fill" style="width:fit-content;">
+      Write to Dr. Swati
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+        <path d="M2 7h10M8 2l4 5-4 5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </a>
+  </div>
+
+  <div class="drswati-visual">
+    <!-- Replace with Dr. Swati's full portrait:
+         <img src="drswati-full.jpg" style="width:100%;height:100%;object-fit:cover;object-position:top"> -->
+    <svg viewBox="0 0 100 130" fill="none">
+      <circle cx="50" cy="36" r="22" fill="currentColor"/>
+      <path d="M6 120c0-24 20-44 44-44s44 20 44 44" fill="currentColor"/>
+    </svg>
+    <div class="drswati-name-overlay">
+      <div class="overlay-name">Dr. Swati</div>
+      <div class="overlay-title">Founder · Harmony Aesthetics & Psychology Studio</div>
+    </div>
+  </div>
+</section>
+
+<!-- TREATMENTS -->
+<section class="treatments" id="treatments">
+  <div class="treatments-header">
+    <div>
+      <div class="section-eyebrow rev" style="margin-bottom:14px;">Treatments Offered</div>
+      <h2 class="section-h2 rev d1" style="margin-bottom:0;">Results that<br/><em>speak quietly</em></h2>
+    </div>
+    <div class="pill-tabs">
+      <button class="ptab active" onclick="filterTreatments(this,'all')">All</button>
+      <button class="ptab" onclick="filterTreatments(this,'aesthetics')">Aesthetics</button>
+      <button class="ptab" onclick="filterTreatments(this,'homeopathy')">Homeopathy</button>
+      <button class="ptab" onclick="filterTreatments(this,'psychology')">Psychology</button>
+    </div>
+  </div>
+
+  <div class="tgrid" id="tgrid">
+    <div class="tcard rev" data-cat="aesthetics">
+      <div class="tcard-img" style="background: linear-gradient(135deg,#d4b8c8,#c0a0b0);">
+        <div class="tcard-img-overlay"><span class="tcard-category">Aesthetics</span></div>
+      </div>
+      <div class="tcard-body">
+        <div class="tcard-title">Lip Filler & Sculpting</div>
+        <div class="tcard-desc">Precision hyaluronic artistry. Natural-looking volume that enhances your unique facial geometry — never overdone.</div>
+        <a href="#" class="tcard-cta">Learn More <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M1 5h8M6 1l3 4-3 4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      </div>
+    </div>
+
+    <div class="tcard rev d1" data-cat="aesthetics">
+      <div class="tcard-img" style="background: linear-gradient(135deg,#c8c0d8,#a8a0c0);">
+        <div class="tcard-img-overlay"><span class="tcard-category">Aesthetics</span></div>
+      </div>
+      <div class="tcard-body">
+        <div class="tcard-title">Botox & Anti-Ageing</div>
+        <div class="tcard-desc">Micro-dosing precision. Softens lines while preserving the expressions that make you recognisably you.</div>
+        <a href="#" class="tcard-cta">Learn More <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M1 5h8M6 1l3 4-3 4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      </div>
+    </div>
+
+    <div class="tcard rev d2" data-cat="aesthetics">
+      <div class="tcard-img" style="background: linear-gradient(135deg,#d0c8e0,#b8b0d0);">
+        <div class="tcard-img-overlay"><span class="tcard-category">Aesthetics</span></div>
+      </div>
+      <div class="tcard-body">
+        <div class="tcard-title">Skin & Laser Therapy</div>
+        <div class="tcard-desc">Microneedling, HF wave treatment, under-eye rejuvenation — for clarity that goes beyond the surface.</div>
+        <a href="#" class="tcard-cta">Learn More <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M1 5h8M6 1l3 4-3 4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      </div>
+    </div>
+
+    <div class="tcard rev" data-cat="aesthetics">
+      <div class="tcard-img" style="background: linear-gradient(135deg,#d8d0c8,#c0b0a8);">
+        <div class="tcard-img-overlay"><span class="tcard-category">Aesthetics</span></div>
+      </div>
+      <div class="tcard-body">
+        <div class="tcard-title">Hair PRP Treatment</div>
+        <div class="tcard-desc">Platelet-rich plasma therapy to restore hair density and scalp health — backed by your own biology.</div>
+        <a href="#" class="tcard-cta">Learn More <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M1 5h8M6 1l3 4-3 4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      </div>
+    </div>
+
+    <div class="tcard rev d1" data-cat="psychology">
+      <div class="tcard-img" style="background: linear-gradient(135deg,#c0c8d8,#a0a8c0);">
+        <div class="tcard-img-overlay"><span class="tcard-category">Psychology</span></div>
+      </div>
+      <div class="tcard-body">
+        <div class="tcard-title">Marital & Intimacy Coaching</div>
+        <div class="tcard-desc">Private sessions that rebuild trust, communication, and emotional connection between partners.</div>
+        <a href="#" class="tcard-cta">Learn More <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M1 5h8M6 1l3 4-3 4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      </div>
+    </div>
+
+    <div class="tcard rev d2" data-cat="homeopathy">
+      <div class="tcard-img" style="background: linear-gradient(135deg,#c8d8c8,#a0c0a0);">
+        <div class="tcard-img-overlay"><span class="tcard-category">Homeopathy</span></div>
+      </div>
+      <div class="tcard-body">
+        <div class="tcard-title">Clinical Homeopathy</div>
+        <div class="tcard-desc">Personalised constitutional treatment for chronic and acute conditions. No side effects, enduring results.</div>
+        <a href="#" class="tcard-cta">Learn More <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M1 5h8M6 1l3 4-3 4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials">
+  <div class="test-header rev">
+    <div class="section-eyebrow">Patient Stories</div>
+    <h2 class="test-heading">Trusted by those who<br/><em>came back</em></h2>
+  </div>
+  <div class="test-grid">
+    <div class="testi rev">
+      <div class="testi-stars">★★★★★</div>
+      <div class="testi-quote">"The results were so natural nobody could tell — they just kept asking what I'd changed. That precision is the art."</div>
+      <div class="testi-author">
+        <div class="testi-dot" style="background: var(--rose);"></div>
+        <div>
+          <div class="testi-name">Priya M.</div>
+          <div class="testi-detail">Lip Filler · Verified Patient</div>
+        </div>
+      </div>
+    </div>
+    <div class="testi rev d1">
+      <div class="testi-stars">★★★★★</div>
+      <div class="testi-quote">"Dr. Swati's counselling gave me language for feelings I'd carried for years. I left every session lighter."</div>
+      <div class="testi-author">
+        <div class="testi-dot" style="background: var(--lavender);"></div>
+        <div>
+          <div class="testi-name">Rahul & Ananya S.</div>
+          <div class="testi-detail">Marital Counselling · Verified Patients</div>
+        </div>
+      </div>
+    </div>
+    <div class="testi rev d2">
+      <div class="testi-stars">★★★★★</div>
+      <div class="testi-quote">"Trusted 10,000 patients isn't just a number — you feel it in every interaction from the first call."</div>
+      <div class="testi-author">
+        <div class="testi-dot" style="background: var(--mist);"></div>
+        <div>
+          <div class="testi-name">Deepika R.</div>
+          <div class="testi-detail">Skin Therapy · Verified Patient</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BOOK BAND -->
+<div class="book-band">
+  <div class="book-band-text">
+    <h2 class="book-band-heading">Ready to begin<br/><em>your consultation?</em></h2>
+    <p class="book-band-sub">Shop No. 214 & 215, Vardhman Plus City Mall, Dwarka Sector 23, New Delhi</p>
+  </div>
+  <div class="book-band-actions">
+    <a href="tel:+919540314878" class="btn-white">
+      Call to Book
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.002 1.2 2 2 0 012 .002h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+    </a>
+    <a href="tel:+919540314878" class="book-band-tel">+91 9540 314 878</a>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="footer" id="contact">
+  <div class="footer-grid">
+    <div>
+      <div class="footer-brand-name">Harmony Aesthetics<br/>&amp; Psychology Studio</div>
+      <p class="footer-brand-body">A trusted destination for advanced skin, hair, and holistic wellness. Where science, aesthetics, and personalised care converge.</p>
+      <div class="footer-brand-contact">
+        +91 9540 314 878<br/>
+        carebydrswati@gmail.com<br/>
+        @harmonyaestheticsandpsychology
+      </div>
+    </div>
+    <div>
+      <div class="footer-col-label">Treatments</div>
+      <ul class="footer-links">
+        <li><a href="#">Lip Fillers</a></li>
+        <li><a href="#">Botox</a></li>
+        <li><a href="#">Skin & Laser</a></li>
+        <li><a href="#">Hair PRP</a></li>
+        <li><a href="#">Homeopathy</a></li>
+        <li><a href="#">Marital Counselling</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-label">Book Via</div>
+      <ul class="footer-links">
+        <li><a href="#">Practo</a></li>
+        <li><a href="#">Lybrate</a></li>
+        <li><a href="#">Direct Call</a></li>
+        <li><a href="#">Google Reviews</a></li>
+        <li><a href="#">drswaticares.com</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-copy">© 2025 Harmony Aesthetics & Psychology Studio. All rights reserved.</div>
+    <span class="wm">Concept Preview by SK Steel Works</span>
+  </div>
+</footer>
+
+<!-- FAB -->
+<a href="tel:+919540314878" class="fab">
+  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.002 1.2 2 2 0 012 .002h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+  Book Now
+</a>
+
+<script>
+  // NAV scroll
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => nav.classList.toggle('scrolled', scrollY > 60), {passive:true});
+
+  // Reveal on scroll
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, {threshold: 0.1});
+  document.querySelectorAll('.rev').forEach(el => io.observe(el));
+
+  // Treatment filter
+  function filterTreatments(btn, cat) {
+    document.querySelectorAll('.ptab').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    document.querySelectorAll('.tcard').forEach(c => {
+      c.style.display = (cat === 'all' || c.dataset.cat === cat) ? '' : 'none';
+    });
+  }
+
+  // Reduced motion
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches)
+    document.querySelectorAll('.rev').forEach(el => el.classList.add('in'));
+</script>
+</body>
+</html>
